@@ -6,7 +6,7 @@ export const ResultList = ({ pokeList }) => {
     return (
         <ul className="results-list">
             {pokeList.map((pokemon) => (
-                <PokeResult key={pokemon.name} pokemon={pokemon} />
+                <PokeResult key={pokemon.id} pokemon={pokemon} />
             ))}
         </ul>
     );

@@ -17,7 +17,11 @@ const useFetchPokemons = () => {
                     pokemonsData.map(async (pokemon) => {
                         const res = await fetch(pokemon.url);
                         const jsonRes = await res.json();
-                        return { name: jsonRes.name, type: jsonRes.types[0].type.name };
+                        return {
+                            id: jsonRes.id,
+                            name: jsonRes.name,
+                            type: jsonRes.types[0].type.name,
+                        };
                     })
                 );
                 setPokemons(detailedPokemons);
