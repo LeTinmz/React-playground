@@ -2,12 +2,27 @@ import { useState, useEffect } from 'react';
 
 const useLocalStorage = (key, initialValue) => {
     const [state, setState] = useState(() => {
-        const item = localStorage.getItem(key);
-        return item ? JSON.parse(item) : initialValue;
+        try {
+            const item = localStorage.getItem(key);
+            if (item && item.trim() !== '') {
+                return JSON.parse(item);
+            }
+            return initialValue;
+        } catch (error) {
+            console.log(`Erreur lors du parsing de localStorage pour la clé "${key}":`, error);
+            return initialValue;
+        }
     });
 
     useEffect(() => {
-        localStorage.setItem(key, JSON.stringify(state));
+        try {
+            localStorage.setItem(key, JSON.stringify(state));
+        } catch (error) {
+            console.error(
+                `Erreur lors de la sauvegarde en localStorage pour la clé "${key}":`,
+                error
+            );
+        }
     }, [key, state]);
 
     return [state, setState];

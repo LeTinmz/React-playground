@@ -1,10 +1,15 @@
-import { useState, useEffect } from 'react';
+// Components/Search.js
+import React from 'react';
 
-const Search = ({ value, placeholder, onInputChange }) => {
+const Search = ({ value, placeholder, onInputChange, className = 'search-input' }) => {
     return (
-        <>
-            <input type="text" value={value} onChange={onInputChange} placeholder={placeholder} />
-        </>
+        <input
+            type="text"
+            value={value}
+            placeholder={placeholder}
+            onChange={onInputChange}
+            className={className}
+        />
     );
 };
 

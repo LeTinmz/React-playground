@@ -1,12 +1,17 @@
+// Components/ResultList.js
 import React from 'react';
-import { PokeResult } from './PokeResult';
 
 export const ResultList = ({ pokeList }) => {
     return (
-        <>
-            {pokeList.map((p) => (
-                <PokeResult key={p.name} pokemon={p}></PokeResult>
+        <ul className="results-list">
+            {pokeList.map((pokemon, index) => (
+                <li key={index} className="pokemon-card">
+                    <h3 className="pokemon-name">{pokemon.name}</h3>
+                    <span className="pokemon-type">{pokemon.type}</span>
+                </li>
             ))}
-        </>
+        </ul>
     );
 };
+
+export default ResultList;
