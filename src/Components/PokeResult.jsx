@@ -1,10 +1,15 @@
 import React from 'react';
+import pokeTypeColor from '../utils/pokeTypeColor';
 
 export const PokeResult = ({ pokemon }) => {
     return (
-        <div style={{ borderBottom: '1px solid white' }}>
-            <p>name : {pokemon.name}</p>
-            <p>type : {pokemon.type}</p>
-        </div>
+        <>
+            <li key={pokemon.name} className="pokemon-card">
+                <h3 className="pokemon-name">{pokemon.name}</h3>
+                <span className="pokemon-type" style={{ background: pokeTypeColor[pokemon.type] }}>
+                    {pokemon.type}
+                </span>
+            </li>
+        </>
     );
 };
