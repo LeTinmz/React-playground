@@ -1,7 +1,7 @@
 import React from 'react';
 import pokeTypeColor from '../utils/pokeTypeColor';
 
-export const PokeResult = ({ pokemon }) => {
+export const PokeResult = ({ pokemon, onselect, buttonLabel }) => {
     return (
         <>
             <li className="pokemon-card">
@@ -9,6 +9,7 @@ export const PokeResult = ({ pokemon }) => {
                 <span className="pokemon-type" style={{ background: pokeTypeColor[pokemon.type] }}>
                     {pokemon.type}
                 </span>
+                <button onClick={() => onselect(pokemon)}>{buttonLabel}</button>
             </li>
         </>
     );

@@ -5,12 +5,16 @@ import hardCodedPokemons from './data/pokeData';
 import { ResultList } from './Components/ResultList';
 import useLocalStorage from './hooks/useLocalStorage';
 import useFetchPokemons from './hooks/useFetchPokemons';
+import useTrainerStore from './Stores/UseTrainerStore';
+import { PokeResult } from './Components/PokeResult';
 
 const App = () => {
     const [name, setName] = useLocalStorage('name', 'Pikachu');
     const [type, setType] = useLocalStorage('type', 'Electrik');
     const { pokemons, isLoading, error } = useFetchPokemons();
 
+    const caughtPokemons = useTrainerStore((state) => state.caughtPokemons);
+    const removePokemon = useTrainerStore((state) => state.removePokemon);
     const shouldSearch = name.length > 0 || type.length > 0;
 
     const handleNameChange = (e) => {
@@ -26,6 +30,9 @@ const App = () => {
         setType('');
     };
 
+    const handleRemove = (pokemon) => {
+        removePokemon(pokemon.id);
+    };
     const searchedPokemons = pokemons.filter(
         (p) =>
             p.name.toLowerCase().includes(name.toLowerCase()) &&
@@ -34,6 +41,17 @@ const App = () => {
 
     return (
         <div className="App">
+            {caughtPokemons.length > 0 ? (
+                caughtPokemons.map((p) => (
+                    <PokeResult
+                        pokemon={p}
+                        buttonLabel={'Remove From Team'}
+                        onselect={handleRemove}
+                    />
+                ))
+            ) : (
+                <p>Aucun Pokemon capturé</p>
+            )}
             {/* Header */}
             <div className="app-header">
                 <h1 className="app-title">PokéSearch</h1>
